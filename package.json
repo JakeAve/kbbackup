@@ -5,7 +5,7 @@
   "main": "main.js",
   "build": {
     "appId": "com.kbbackup",
-    "productName": "KBase Back Up",
+    "productName": "KBase BackUp",
     "win": {
       "target": [
         "nsis"

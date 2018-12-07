@@ -1,8 +1,8 @@
 directories:
   output: dist
   buildResources: build
-appId: com.kbnewspost
-productName: KBase News Post
+appId: com.kbbackup
+productName: KBase BackUp
 win:
   target:
     - nsis

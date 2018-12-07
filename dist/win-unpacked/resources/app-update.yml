@@ -1,0 +1,4 @@
+owner: JakeAve
+repo: kbbackup
+provider: github
+updaterCacheDirName: kbbackup-updater
