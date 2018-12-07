@@ -10,7 +10,7 @@
       "target": [
         "nsis"
       ],
-      "icon": "assets/icons/icon.ico"
+      "icon": "assets/images/icon.ico"
     },
     "nsis": {
       "installerIcon": "assets/images/icon.ico",
