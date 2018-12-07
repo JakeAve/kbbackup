@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Knowledge Base Backup</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Cairo|Ubuntu" rel="stylesheet">
+</head>
+
+<body class="colorchange">
+    
+    <div id="top"></div>
+    
+    <h1>Welcome to the Back Up App</h1>
+    
+    <div class="bigdiv folderdiv" id="folderdiv">
+        <div class="backupsavedin">Backup will be saved in:</div>
+        <input class="selected-folder" id="selected-folder" placeholder="C://choose/a/folder/">
+        <button class="choosefolder colorchange" id="selectDirBtn">Choose a Folder</button>
+    </div>
+
+    <div class="bigdiv login" id="login">
+        <form class="mainform">
+            <input class="usepass" id="username" placeholder="Username" type="text">
+            <input class="usepass" id="pass" placeholder="Password" type="password">
+            <button class="colorchange" id="backupBtn" type="submit">Back Up all Answer Ids</button>
+        </form>
+    </div>
+    
+    <div class="bigdiv" id="progressdiv">
+        <div class="log" id="log"></div>
+        <div class="progress-wrapper">
+            <div class="progress colorchange" id="progress">0%</div>
+        </div>
+    </div>
+
+    <div class="logsDiv">
+        <button>Get Logs</button>
+    </div>
+    
+    <div class="win-controls" id="win-controls">
+        <img class="menuitems min" id="min" src="../assets/images/blackMin.svg">
+        <!--<img class="menuitems max" id="max" src="../assets/images/blackSquare.svg">-->
+        <img class="menuitems xout" id="xout" src="../assets/images/blackX.svg">
+    </div> 
+    
+    <script src="logic.js"></script>
+    <script src="htmlCall.js"></script>
+</body>
+
+</html>

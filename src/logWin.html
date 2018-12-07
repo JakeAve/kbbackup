@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Knowledge Base Backup</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Cairo|Ubuntu" rel="stylesheet">
+</head>
+
+<body>
+    <div class="tabBtns">
+        <button class="tabBtn selected-tab" onclick="openTab('tab1', this)">Main Log</button>
+        <button class="tabBtn" onclick="openTab('tab2', this)">Blanks</button>
+        <button class="tabBtn" onclick="openTab('tab3', this)">Question Files</button>
+        <button class="tabBtn" onclick="openTab('tab4', this)">Full Iterations</button>
+    </div>
+    <div id="tab1" class="logTab open">
+        <p class="title mainLog-title"></p>
+        <textarea class="mainLog bigdiv" contenteditable="false"></textarea>
+        <button class="copy">Copy This</button>
+    </div>
+    <div id="tab2" class="logTab">
+        <p class="title misseds-title"></p>
+        <textarea class="misseds bigdiv" contenteditable="false"></textarea>
+        <button class="copy">Copy This</button>        
+    </div>   
+    <div id="tab3" class="logTab">
+        <p class="title extraFiles-title"></p>
+        <textarea class="extraFiles bigdiv" contenteditable="false"></textarea>
+        <button class="copy">Copy This</button>
+    </div>   
+    <div id="tab4" class="logTab"> 
+        <p class="title iterations-title"></p>
+        <textarea class="iterations bigdiv" contenteditable="false"></textarea>
+        <button class="copy">Copy This</button>
+    </div>   
+
+    <script src="logWin.js"></script>
+
+</body>
+
+</html>

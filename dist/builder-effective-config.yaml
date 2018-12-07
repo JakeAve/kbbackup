@@ -1,0 +1,14 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.kbnewspost
+productName: KBase News Post
+win:
+  target:
+    - nsis
+  icon: assets/icons/icon.ico
+nsis:
+  installerIcon: assets/images/icon.ico
+  uninstallerIcon: assets/images/icon.ico
+  runAfterFinish: true
+electronVersion: 3.0.10
