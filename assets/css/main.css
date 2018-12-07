@@ -24,7 +24,7 @@ input {
 input:focus, textarea:focus{
     outline: 2px solid #808080;
 }
-
+/*This makes sure you can click and drag from the top of the window*/
 #top {
     position: fixed;
     top: 0;
@@ -32,11 +32,11 @@ input:focus, textarea:focus{
     width: 85%;
     -webkit-app-region: drag;
 }
-
+/*The greyish opaque boxes. These are main content holders*/
 .bigdiv {
     width: 90%;
     margin: 25px auto;
-    background-color: #EAECEE;
+    background-color: rgb(234,236,238, .75);
     padding: 25px;
     box-shadow: -2.5px 2.5px 24px -2px rgba(0,0,0,1);
 }
@@ -54,7 +54,7 @@ input:focus, textarea:focus{
     width: 55%;
     margin: 5px 0;    
 }
-
+/*All buttons are basically in the middle and big*/
 button {
     width: 30%;
     display: block;
@@ -81,12 +81,12 @@ button:hover, button:focus, .selected-tab {
     margin: 10px auto;
     
 }
-
+/*this is the main output in the javascript files*/
 .log {
     text-align: center;
     color: black;
 }
-
+/*These two make the cool progress bar*/
 .progress-wrapper {
     margin: auto;
     width: 85%;
@@ -105,7 +105,7 @@ button:hover, button:focus, .selected-tab {
     padding: 5px 0;
     transition: .4s;
 }
-
+/*The next bit is for the logWin.html*/
 .logsDiv button {
     background-color: transparent;
     border: none;
@@ -135,6 +135,7 @@ button.tabBtn {
     margin: .5em;
 }
 
+/*The logs textareas*/
 textarea.bigdiv {
     box-sizing: border-box;
     height: 73vh;
@@ -163,7 +164,7 @@ textarea.bigdiv {
 ::-webkit-scrollbar-thumb:hover {
     background: #555; 
 }
-
+/*Handles the buttons at the top of the window*/
 .win-controls {
     position: fixed;
     top: 10px;
@@ -202,6 +203,7 @@ textarea.bigdiv {
     animation: colorshift 10s infinite;
 }
 
+/*The alert*/
 @keyframes alert {
     0% {outline: 5px solid transparent; transform: rotateY(0deg)}
     25% {outline: 5px solid red; transform: rotateY(10deg)}
@@ -210,6 +212,7 @@ textarea.bigdiv {
     100% {outline: 5px solid transparent; transform: rotateY(0deg)}
 }
 
+/*When all the buttons and background change colors*/
 @keyframes colorshift {
     0%{background-color: #008080; border-color: #008080; color: white;}
     20%{background-color: #228b22; border-color: #228b22; color: white;}

@@ -1,5 +1,6 @@
 const { ipcRenderer } = require('electron');
 
+//Puts all the data in the HTML. This data comes from global variables in htmlcalls.js and the mainLog in logic.js
 ipcRenderer.on('received-data', (e, mainLog, iterations, misseds, extraFiles) => {
     const logLines = mainLog.split(/\r\n|\r|\n/).length - 1;
     document.querySelector('.mainLog-title').innerHTML = `Main Log (${logLines})`;
@@ -16,6 +17,7 @@ ipcRenderer.on('received-data', (e, mainLog, iterations, misseds, extraFiles) =>
 
 })
 
+//Standard tabs
 function openTab(id, btn) {
     const tabs = document.querySelectorAll('.logTab');
     for (let i = 0; i < tabs.length; i ++) {
@@ -31,6 +33,7 @@ function openTab(id, btn) {
 
 }
 
+//Copies the textarea above the button
 const copyBtns = document.querySelectorAll('.copy');
 for (let i = 0; i < copyBtns.length; i ++) {
     copyBtns[i].addEventListener('click', (e) => {
@@ -41,5 +44,6 @@ for (let i = 0; i < copyBtns.length; i ++) {
     });
 }
 
+//When DOM is ready, it tells the main.js
 ipcRenderer.send('ready-for-data')
 

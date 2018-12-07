@@ -1,7 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 
-// this should be placed at top of main.js to handle setup events quickly
-
+//the two windows
 let win;
 let logWin
 
@@ -34,14 +33,17 @@ function createLogWin() {
     logWin.setMenu(null)
 }
 
+//Promted after user clicks 'Get Logs' on index.html
 ipcMain.on('open-log-win', () => {
     createLogWin()
 })
 
+//Received when the DOM is ready at logWin
 ipcMain.on('ready-for-data', () => {
     win.webContents.send('ready-for-log')
 })
 
+//Forwards information to logWin.js
 ipcMain.on('received-data', (e, mainLog, iterations, misseds, extraFiles) => {
     logWin.webContents.send('received-data', mainLog, iterations, misseds, extraFiles);
 })
@@ -49,7 +51,7 @@ ipcMain.on('received-data', (e, mainLog, iterations, misseds, extraFiles) => {
 app.on('ready', createWindow);
 
 
-//menu template
+//menu template. Is mainly for keyboard shortcuts 
 const mainMenuTemplate = [
     {
         label: 'File',
@@ -76,6 +78,7 @@ const mainMenuTemplate = [
     }
 ];
 
+//Allows user to choose a file from their native file explorer
 ipcMain.on('open-file-dialog', (e) => {
     dialog.showOpenDialog({
         properties: ['openFile', 'openDirectory']
@@ -86,19 +89,19 @@ ipcMain.on('open-file-dialog', (e) => {
     });
 });
 
-ipcMain.on('close-app', (event) => {
+ipcMain.on('close-app', () => {
     app.quit();
 });
 
-ipcMain.on('max-win', (event) => {
+ipcMain.on('max-win', () => {
     win.maximize();
 });
 
-ipcMain.on('half-max', (event) => {
+ipcMain.on('half-max', () => {
     win.unmaximize();
 });
 
-ipcMain.on('min-win', (event) => {
+ipcMain.on('min-win', () => {
     win.minimize();
 });
 
