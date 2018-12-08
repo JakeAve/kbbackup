@@ -11,14 +11,16 @@ let mainLog;
 //Sends a process to main.js to open a file explorer
 const selectDirBtn = document.getElementById('selectDirBtn');
 selectDirBtn.addEventListener('click', (event) => {
-    ipcRenderer.send('open-file-dialog');
+    dialog.showOpenDialog({
+        properties: ['openFile', 'openDirectory']
+    }, (files) => {
+        if (files) {
+            document.getElementById('selected-folder').value = files;
+            mainLog += `${logTime()}Selected directory as "${files}"`;
+            selectDirBtn.blur();
+        }
+    });
     mainLog += `${logTime()}Opened folder dialog`;
-});
-
-//puts the selected directory into the selected-folder input
-ipcRenderer.on('selected-directory', (event, path) => {
-    document.getElementById('selected-folder').value = path;
-    mainLog += `${logTime()}Selected directory as "${path}"`;
 });
 
 //triggers a warning if a path for the folder is not specified 
@@ -163,8 +165,9 @@ function completeDialog() {
     }).then(()=> {
         const arr = [mainLog, iterations, misseds, extraFiles];
         saveLogs(arr);
+        showBackupedFiles();
     });
-}
+};
 
 //opens the log win and saves the logs when the button is pressed
 function openLogWin() {
@@ -174,12 +177,12 @@ function openLogWin() {
         const arr = [mainLog, iterations, misseds, extraFiles];
         saveLogs(arr);
     }
-}
+};
 
 //When received from main.js, will send the logs over
 ipcRenderer.on('ready-for-log', () => {
     ipcRenderer.send('received-data', mainLog, iterations, misseds, extraFiles);
-})
+});
 
 //If a directory was created, it will save the logs before closing
 window.onbeforeunload = () => {
@@ -187,7 +190,7 @@ window.onbeforeunload = () => {
         const arr = [mainLog, iterations, misseds, extraFiles];
         saveLogs(arr);
     }
-}
+};
 
 //will prompt the logWin to open
 document.querySelector('.logsDiv BUTTON').addEventListener('click', openLogWin);
@@ -204,7 +207,15 @@ function logTime() {
     const s = d.getSeconds();
     const mil = d.getMilliseconds();
     return `\r\n${date}-${months[m]}-${y} at ${h}:${min < 10 ? '0' + min : min}:${s < 10 ? '0' + s : s}:${mil < 10 ? '00' + mil : mil < 100 ? '0' + mil : mil} | `
-}
+};
+
+//Shows the folder that was just backed up
+function showBackupedFiles() {
+    dialog.showOpenDialog({
+        filters: [{name: 'All Files', extensions: ['*']}],
+        properties: ['openFile']
+    })
+};
 
 //Shows that the DOM is basically loaded
 mainLog = `${logTime()}DOM Loaded`;

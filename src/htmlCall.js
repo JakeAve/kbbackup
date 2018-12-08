@@ -120,6 +120,7 @@ function mainBackup() {
     iterationElapses.push(new Date());
     //redirects, saves file, displays results
     async function requestAndSave(fileNumber) {
+        //This path can be changed if the version number is different
         options.path = `/services/rest/connect/v1.3/answers/${fileNumber}`;
         const response = await httpRequest(fileNumber);
         await saveFiles(response, fileNumber);

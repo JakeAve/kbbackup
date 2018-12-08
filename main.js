@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 //the two windows
 let win;
@@ -14,6 +14,7 @@ function createWindow() {
 
     win.on('closed', () => {
         win = null
+        app.quit()
     });
     //render menu from template
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -48,9 +49,6 @@ ipcMain.on('received-data', (e, mainLog, iterations, misseds, extraFiles) => {
     logWin.webContents.send('received-data', mainLog, iterations, misseds, extraFiles);
 })
 
-app.on('ready', createWindow);
-
-
 //menu template. Is mainly for keyboard shortcuts 
 const mainMenuTemplate = [
     {
@@ -78,17 +76,6 @@ const mainMenuTemplate = [
     }
 ];
 
-//Allows user to choose a file from their native file explorer
-ipcMain.on('open-file-dialog', (e) => {
-    dialog.showOpenDialog({
-        properties: ['openFile', 'openDirectory']
-    }, (files) => {
-        if (files) {
-            e.sender.send('selected-directory', files);
-        }
-    });
-});
-
 ipcMain.on('close-app', () => {
     app.quit();
 });
@@ -111,7 +98,7 @@ app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
       app.quit()
     }
-  });
+});
 
 app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -119,4 +106,6 @@ app.on('activate', () => {
     if (win === null) {
       createWindow()
     }
-  });
+});
+
+app.on('ready', createWindow);
