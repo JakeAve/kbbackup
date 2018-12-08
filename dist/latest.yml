@@ -1,8 +1,8 @@
 version: 1.5.0
 files:
   - url: kbbackup-setup-1.5.0.exe
-    sha512: r49mzhrbYaGuPUjVikWKHzX7JXgojwiHroVqtka2KJe3G/9adcWYt5nVuGe/KtWDnoMa5SEYlzv0IFXkBfr6rw==
-    size: 38027612
+    sha512: eYpTSoIo9kpG5A+Se8xSrBESfhzhGUDfKSIrAwX51+vqU8/gK9HiXAHTuyHfVGiqKFZjMne84gqerG5ceCwG5A==
+    size: 38029335
 path: kbbackup-setup-1.5.0.exe
-sha512: r49mzhrbYaGuPUjVikWKHzX7JXgojwiHroVqtka2KJe3G/9adcWYt5nVuGe/KtWDnoMa5SEYlzv0IFXkBfr6rw==
-releaseDate: '2018-12-07T05:10:38.195Z'
+sha512: eYpTSoIo9kpG5A+Se8xSrBESfhzhGUDfKSIrAwX51+vqU8/gK9HiXAHTuyHfVGiqKFZjMne84gqerG5ceCwG5A==
+releaseDate: '2018-12-08T04:35:34.342Z'
