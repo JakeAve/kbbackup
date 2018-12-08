@@ -10,7 +10,7 @@ ipcRenderer.on('received-data', (e, mainLog, iterations, misseds, extraFiles) =>
     document.querySelector('.iterations').value = `Total Iterations: ${iterations.length - 1}\n${iterations.join('\n')}`;
 
     document.querySelector('.misseds-title').innerHTML = `Blank Answers / Missed (${misseds.length})`;
-    document.querySelector('.misseds').value = `Total Blank Ansers: ${misseds.length}\n${misseds.sort(function(a, b){return a - b}).join('\n')}`;
+    document.querySelector('.misseds').value = `Total Blank Anwsers: ${misseds.length}\n${misseds.sort(function(a, b){return a - b}).join('\n')}`;
 
     document.querySelector('.extraFiles-title').innerHTML = `Answers with Questions (${extraFiles.length})`;
     document.querySelector('.extraFiles').value = `Total Answers with Questions: ${extraFiles.length}\n${extraFiles.sort(function(a, b){return a - b}).join('\n')}`;
