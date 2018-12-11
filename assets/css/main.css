@@ -1,0 +1,222 @@
+* {
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #008080;
+    transition: 1s; 
+}
+
+h1 {
+    font-family: 'nanum gothic', sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 250%;
+    margin: 50px 0;
+}
+
+input {
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px;
+}
+
+input:focus, textarea:focus{
+    outline: 2px solid #808080;
+}
+/*This makes sure you can click and drag from the top of the window*/
+#top {
+    position: fixed;
+    top: 0;
+    height: 50px;
+    width: 85%;
+    -webkit-app-region: drag;
+}
+/*The greyish opaque boxes. These are main content holders*/
+.bigdiv {
+    width: 90%;
+    margin: 25px auto;
+    background-color: rgb(234,236,238, .75);
+    padding: 25px;
+    box-shadow: -2.5px 2.5px 24px -2px rgba(0,0,0,1);
+}
+
+.backupsavedin {
+    display: inline-block;
+    width: 40%;
+    text-align: right;
+    margin: 5px 0;
+    color: black;
+}
+
+.selected-folder {
+    display: inline-block;
+    width: 55%;
+    margin: 5px 0;    
+}
+/*All buttons are basically in the middle and big*/
+button {
+    width: 30%;
+    display: block;
+    margin: 15px auto;
+    border: 2px solid #008080;
+    background-color: #008080;
+    color: #ffffff;
+    letter-spacing: 1px;
+    font-size: 16px;
+    padding: 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover, button:focus, .selected-tab {
+    background-color: #ffffff;
+    color: #008080;
+    outline: none;
+}
+
+.usepass {
+    width: 40%;
+    display: block;
+    margin: 10px auto;
+    
+}
+/*this is the main output in the javascript files*/
+.log {
+    text-align: center;
+    color: black;
+}
+/*These two make the cool progress bar*/
+.progress-wrapper {
+    margin: auto;
+    width: 85%;
+    border-right: 5px solid black;
+    border-left: 5px solid black;
+}
+
+.progress {
+    display: inline-block;
+    width: 0%;
+    background-color: #008080;
+    color: white;
+    text-align: right;
+    letter-spacing: .75px;
+    vertical-align: middle;
+    padding: 5px 0;
+    transition: .4s;
+}
+/*The next bit is for the logWin.html*/
+.logsDiv button {
+    background-color: transparent;
+    border: none;
+}
+
+.logsDiv button:hover, .logsDiv button:focus {
+    background-color: rgb(0,0,0,.25);
+    color: white;
+}
+
+button.tabBtn {
+    display: inline-block;
+    width: 20%;
+    margin: .25em;
+}
+
+.logTab {
+    display: none;
+}
+
+.logTab.open {
+    display: block;
+}
+
+.title {
+    color: white;
+    margin: .5em;
+}
+
+/*The logs textareas*/
+textarea.bigdiv {
+    box-sizing: border-box;
+    height: 73vh;
+    width: 100%;
+    margin: auto;
+    resize: none;
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: black; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+/*Handles the buttons at the top of the window*/
+.win-controls {
+    position: fixed;
+    top: 10px;
+    right: 0;
+    width: 8%;
+}
+
+.menuitems {
+    display: inline-block;
+    cursor: pointer;
+    width: 35%;
+    margin-left: 5%;
+    background: transparent;
+    padding: 1%;
+    min-width: 20px;
+    max-width: 35px;
+    transition: .3s ease-out;
+    
+}
+
+.win-controls:hover .xout {
+    background-color: rgb(0,0,0,.25);
+}
+.win-controls:hover .max {
+    background-color:rgb(0,0,0,.25);
+}
+.win-controls:hover .min {
+    background-color: rgb(0,0,0,.25);
+}
+
+.alert {
+    animation: alert 1s ease-out 2;
+}
+
+.gradient {
+    animation: colorshift 10s infinite;
+}
+
+/*The alert*/
+@keyframes alert {
+    0% {outline: 5px solid transparent; transform: rotateY(0deg)}
+    25% {outline: 5px solid red; transform: rotateY(10deg)}
+    50% {outline: 5px solid transparent; transform: rotateY(0deg)}
+    75% {outline: 5px solid red; transform: rotateY(-10deg)}
+    100% {outline: 5px solid transparent; transform: rotateY(0deg)}
+}
+
+/*When all the buttons and background change colors*/
+@keyframes colorshift {
+    0%{background-color: #008080; border-color: #008080; color: white;}
+    20%{background-color: #228b22; border-color: #228b22; color: white;}
+    80%{background-color: #ff4500; border-color: #ff4500; color: white;}
+    60%{background-color: #663399; border-color: #663399; color: white;}
+    40%{background-color: #B22222; border-color: #b22222; color: white;}
+}

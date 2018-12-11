@@ -1,0 +1,34 @@
+{
+  "name": "kbbackup",
+  "version": "1.5.0",
+  "description": "Backup all the answer IDs on the KBase",
+  "main": "main.js",
+  "build": {
+    "appId": "com.kbbackup",
+    "productName": "KBase BackUp",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/images/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "assets/images/icon.ico",
+      "uninstallerIcon": "assets/images/icon.ico",
+      "runAfterFinish": true
+    }
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron ."
+  },
+  "author": "Jacob Avery",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^3.0.10",
+    "electron-builder": "^20.38.2"
+  }
+}
