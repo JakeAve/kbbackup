@@ -176,9 +176,7 @@ function timeSince(i) {
 //Pushes a new value into the elapse array and gets the average of it
 function pushAndAverageArray(arr, i) {
     arr.push((iterationElapses[i] - new Date()) / -1000);
-    const sum = arr.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue;
-    }, 0);
+    const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue );
     const avg = sum / arr.length;
     return avg.toFixed(3)
 };
