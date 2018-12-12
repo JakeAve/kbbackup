@@ -34,7 +34,7 @@ var a_id;
 //Makes a directory with the name kbasebackup and the time of the backup
 //The directory names are saved as global variables folderName and a_id
 function makeFolders(path) {
-    const timeStamp = (new Date()).toJSON().slice(0, 19).replace(/:/, 'h').replace(/:/, 'm') + 's';
+    const timeStamp = new Date().toString().replace(/\s|:/g, '-').slice(0,24);
     const name = `${path}/KBaseBackup-${timeStamp}`;
     const a_idFolder = `${name}/a_ids`;
 
@@ -135,7 +135,7 @@ function mainBackup() {
             iterationElapses.push(new Date());
             
             if ((i % 1000 === 0)) {
-                mainLog += `${logTime()}${timeSince(0)}Reached Answer ID ${i}`;
+                mainLog += `${logTime()}${timeSince(0)}Reached Answer ID ${i}, ${iterations[0]}`;
             }
 
             if (i === totalAnswerIds) {
@@ -150,6 +150,7 @@ function mainBackup() {
     //This is just for testing. Comment out the for loop and uncomment this
     /*setTimeout(() => {
         completeDialog();
+        mainLog += `----------Test Run Complete. Terminating Sequence----------`;
     }, 1000);*/
 
 };
@@ -164,11 +165,22 @@ misseds.name = `BlankOrMissedIDs`;
 var iterations = ['Start Iterations'];
 iterations.name = `FullIterations`;
 var iterationElapses = [];
+var iterationsForAvg = [];
 
 //This accesses the iterationElapse array and shows how many seconds
 //have passed since it was logged in mainBackup
 function timeSince(i) {
-    return `${((iterationElapses[i] - new Date())/-1000).toFixed(3)}s `
+    return `${((iterationElapses[i] - new Date()) / -1000).toFixed(3)}s `
+};
+
+//Pushes a new value into the elapse array and gets the average of it
+function pushAndAverageArray(arr, i) {
+    arr.push((iterationElapses[i] - new Date()) / -1000);
+    const sum = arr.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+    }, 0);
+    const avg = sum / arr.length;
+    return avg.toFixed(3)
 };
 
 //Displays how many files have been written in output
@@ -179,7 +191,7 @@ function display(fileNumber) {
         const progressRnd = Math.floor(progress);
         document.getElementById('progress').style.width = progress + '%';
         document.getElementById('progress').innerHTML = progressRnd + '%&nbsp;';
-        output.innerHTML = `File:${fileNumber}, Files Written: ${filesWritten}, Blank Answers: ${misseds.length} `;
+        output.innerHTML = `File: ${fileNumber}, Files Written: ${filesWritten}, Blank Answers: ${misseds.length}, ${iterations[0]}`;
     });
 };
 
@@ -239,6 +251,8 @@ function saveFiles(content, fileNumber) {
         }
     });
     iterations[fileNumber] += `${logTime()}${timeSince(fileNumber)}Saved solution`;
+    //saves the averageTime to save a file in iterations[0]
+    iterations[0] = `Average Time: ${pushAndAverageArray(iterationsForAvg, fileNumber)}s`;
 };
 
 //Saves the logs to txt files in the folderName directory
