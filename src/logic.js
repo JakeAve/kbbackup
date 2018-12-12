@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const { ipcRenderer } = require('electron');
-const { dialog } = require('electron').remote;
+const { dialog, shell } = require('electron').remote;
 
 //mainLog stores logging information.
 //The data can be seen in logWin
@@ -158,7 +158,7 @@ function completeDialog() {
             const savedFiles = files.length;
             const missing = runs - savedFiles;
             dialog.showMessageBox({type: 'info', alwaysOnTop: true, message: `The backup has finished running. \n${missing == 0 ? `There are no missing files!` : missing == 1 ? `There is 1 missing file` : `There are ${missing} missing files`}`});
-            const completeLog = `${logTime()}Displayed complete dialog with ${runs} Runs, ${savedFiles} savedFiles and ${missing} Missing File(s)`;
+            const completeLog = `${logTime()}Displayed complete dialog with ${runs} Runs, ${savedFiles} savedFiles and ${missing} Missing File(s), ${iterations[0]}`;
             mainLog += completeLog;
             resolve(completeLog);
         });
@@ -209,12 +209,9 @@ function logTime() {
     return `\r\n${date}-${months[m]}-${y} at ${h}:${min < 10 ? '0' + min : min}:${s < 10 ? '0' + s : s}:${mil < 10 ? '00' + mil : mil < 100 ? '0' + mil : mil} | `
 };
 
-//Shows the folder that was just backed up
+//Shows the folder that was just backed up.
 function showBackupedFiles() {
-    dialog.showOpenDialog({
-        filters: [{name: 'All Files', extensions: ['*']}],
-        properties: ['openFile']
-    })
+    shell.showItemInFolder(a_id)
 };
 
 //Shows that the DOM is basically loaded
