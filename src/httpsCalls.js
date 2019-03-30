@@ -1,10 +1,10 @@
-
+const https = require('https');
 //options for the get requests. This is a global variable to be accessed/edited anywhere below
 let options = {
     "method": "GET",
     "hostname": "youngliving.custhelp.com",
     "port": null,
-    "path": "/services/rest/connect/v1.3/answers?limit=10000&totalResults=true",
+    "path": "/services/rest/connect/v1.3/answers?limit=20000&totalResults=true",
     "headers": {
         "authorization": "",
         "cache-control": "no-cache"
@@ -20,12 +20,22 @@ var totalAnswerIds;
 //When everything is done, it starts the mainBackup
 function beginBackup (authorization, path) {
     options.headers.authorization = authorization;
-    async function wait() {
+    mainLog += `${logTime()}made it to begin backup`;
+    /*async function wait() {
         totalAnswerIds = await getTotalAnswerIds();
         a_id = await makeFolders(path);
         mainBackup();
     };
-    wait();
+    wait();*/
+    a_id = makeFolders(path);
+    getTotalAnswerIds()
+        .then(res => {
+            totalAnswerIds = res;
+            mainBackup();
+        })
+        .catch(() => {
+            mainLog += `${logTime()}Abandoned the backup :(`;
+        })
 };
 
 var folderName;
@@ -63,8 +73,10 @@ function makeFolders(path) {
 //This gets the total answerIds then returns it in beginBackup
 //Sends error codes if it cannot connect or the authorization doesn't work
 function getTotalAnswerIds() {
-    return new Promise((resolve) => {
+    mainLog += `${logTime()}Inside getTotalAnswerIds`;
+    return new Promise((resolve, reject) => {
         const req = https.request(options, (res) => {
+            mainLog += `${logTime()}${req}`;
             let response = "";
             res.setEncoding("utf8");
             res.on('data', (chunk) => {
@@ -92,13 +104,15 @@ function getTotalAnswerIds() {
                         //console.log('status 200, but data was not found');
                         output.innerHTML = 'There was a problem connecting. Check the network and your credentials';
                         alert(document.getElementById('progressdiv'));
-                        mainLog += `${logTime()}Error with status code : ${res.statusCode}`;
+                        mainLog += `${logTime()}Error with status code : ${res.statusCode, response}`;
+                        reject(response);
                     }
                 } else {
                     //console.log('still no status 200');
                     output.innerHTML = 'There was a problem connecting. Check the network and your credentials';
                     alert(document.getElementById('progressdiv'));
-                    mainLog += `${logTime()}Error with status code : ${res.statusCode}`;
+                    mainLog += `${logTime()}Error with status code : ${res.statusCode, response}`;
+                    reject(response);
                 }
             });
         });

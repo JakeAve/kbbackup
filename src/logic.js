@@ -58,6 +58,7 @@ function startBackup(event) {
     const path = document.getElementById('selected-folder').value;
     if (path == '' || fs.existsSync(path) == false) {
         noPath();
+        mainLog += `${logTime()}${fs.existsSync(path)}`;
         return
     } else {
     //if the path is good, will start the backup and indicate the app is working
@@ -67,7 +68,7 @@ function startBackup(event) {
         changeColors();
         output.innerHTML = 'Preparing backup...';
     }
-    setTimeout(checkBackup, 5000);
+    setTimeout(checkBackup, 20000);
 };
 
 //makes a red box around the affected div area. Will normally change the "output"
